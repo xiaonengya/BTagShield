@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BTagShield - B站标签过滤器</title>
+  <link rel="stylesheet" href="css/popup.css">
+</head>
+<body>
+  <div class="container">
+    <!-- 头部 -->    
+    <div class="header">
+      <h1>BTagShield</h1>
+      <div class="subtitle">B站标签过滤器</div>
+      <div class="theme-toggle">
+        <span class="theme-icon">☀️</span>
+        <label class="toggle-switch theme-switch">
+          <input type="checkbox" id="theme-toggle">
+          <span class="toggle-slider"></span>
+        </label>
+        <span class="theme-icon">🌙</span>
+      </div>
+    </div>
+    
+    <!-- 主内容区域 -->
+    <div class="main-content">
+      <!-- 启用过滤设置 -->
+      <div class="section settings-section">
+        <div class="toggle-container">
+          <span>启用标签过滤</span>
+          <label class="toggle-switch">
+            <input type="checkbox" id="enable-filter" checked>
+            <span class="toggle-slider"></span>
+          </label>
+        </div>
+        
+        <div class="toggle-container">
+          <span>显示过滤通知</span>
+          <label class="toggle-switch">
+            <input type="checkbox" id="show-notification" checked>
+            <span class="toggle-slider"></span>
+          </label>
+        </div>
+      </div>
+      
+      <!-- 标签过滤区域 -->
+      <div class="section filter-section">
+        <div class="section-title">标签管理</div>
+        
+        <!-- 标签输入区域 -->
+        <div class="tag-input-container">
+          <input type="text" id="tag-input" placeholder="输入需要过滤的标签">
+          <button id="add-tag-btn">添加</button>
+        </div>
+        
+        <!-- 标签工具栏 -->
+        <div class="tag-tools-container">
+          <div class="search-container">
+            <input type="text" id="tag-search" class="search-input" placeholder="搜索标签...">
+          </div>
+          <div class="sort-container">
+            <select id="tag-sort" class="sort-select">
+              <option value="newest">最新添加</option>
+              <option value="oldest">最早添加</option>
+              <option value="az">A-Z 排序</option>
+              <option value="za">Z-A 排序</option>
+              <option value="length">按长度排序</option>
+            </select>
+          </div>
+        </div>
+        
+        <!-- 标签统计 -->
+        <div class="tag-stats">
+          共 <span id="tag-count">0</span> 个过滤标签
+        </div>
+        
+        <!-- 标签列表容器 -->
+        <div class="tag-list-wrapper">
+          <div class="tag-list" id="tag-list"></div>
+        </div>
+        
+        <!-- 分页控制 -->
+        <div class="tag-pagination">
+          <button class="page-btn" id="prev-page" disabled>上一页</button>
+          <span id="page-info">第 1 页，共 1 页</span>
+          <button class="page-btn" id="next-page" disabled>下一页</button>
+        </div>
+          <!-- 批量操作按钮 -->
+        <div class="tag-actions">
+          <button class="small-btn" id="export-tags">导出标签</button>
+          <button class="small-btn" id="import-tags">导入标签</button>
+          <button class="small-btn danger-btn" id="clear-tags">清空标签</button>
+          <input type="file" id="import-file" accept=".json" style="display: none;">
+        </div>
+        
+        <!-- 提示信息 -->
+        <div class="tips">
+          🔍 提示：B站首页、排行榜、搜索结果、视频详情页等支持标签过滤。
+          <br>💡 添加标签时请确保标签名称准确，支持导入导出管理标签。
+          <br>⚠️ 注意：除了主题深浅切换，其他设置都要点击保存。
+        </div>
+      </div>
+    </div>
+    
+    <!-- 底部状态和保存按钮 -->
+    <div class="footer">
+      <div id="status" class="status"></div>
+      <button id="save-btn">保存设置</button>
+    </div>
+  </div>
+  
+  <script src="js/popup.js"></script>
+</body>
+</html>
