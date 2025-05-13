@@ -315,10 +315,27 @@ function processVideoTags() {
                   
                   // 5. 给通知足够的时间完成淡出动画，再返回
                   let backTimer = setTimeout(() => {
-                    // 返回上一页
+                    // 返回上一页 - 使用多种方法确保至少一种能生效
                     try {
+                      console.log("BTagShield: 尝试返回上一页");
+                      
+                      // 方法1: 使用history API
                       window.history.back();
+                      
+                      // 方法2: 如果5毫秒后仍在同一页面，尝试使用referrer
+                      setTimeout(() => {
+                        if (document.visibilityState !== 'hidden') {
+                          console.log("BTagShield: 方法1失败，尝试方法2");
+                          if (document.referrer && document.referrer.includes("bilibili.com")) {
+                            window.location.replace(document.referrer);
+                          } else {
+                            // 方法3: 如果referrer不可用，直接跳转到B站首页
+                            window.location.href = "https://www.bilibili.com";
+                          }
+                        }
+                      }, 100);
                     } catch (e) {
+                      console.error("BTagShield: 返回出错", e);
                       window.location.href = document.referrer || "https://www.bilibili.com";
                     }
                     
@@ -339,15 +356,31 @@ function processVideoTags() {
                 clearTimeout(changeTimer);
               });
             });
-          } else {
-            // 如果不显示通知，静默倒计时2秒后返回
+          } else {            // 如果不显示通知，静默倒计时2秒后返回
             setTimeout(() => {
               // 设置全局标志，避免页面导航触发的重复检测
               window.BTagShieldReturning = true;
               
               try {
+                console.log("BTagShield: 静默模式尝试返回上一页");
+                
+                // 方法1: 使用history API
                 window.history.back();
+                
+                // 方法2: 如果10毫秒后仍在同一页面，尝试使用referrer
+                setTimeout(() => {
+                  if (document.visibilityState !== 'hidden') {
+                    console.log("BTagShield: 静默模式方法1失败，尝试方法2");
+                    if (document.referrer && document.referrer.includes("bilibili.com")) {
+                      window.location.replace(document.referrer);
+                    } else {
+                      // 方法3: 如果referrer不可用，直接跳转到B站首页
+                      window.location.href = "https://www.bilibili.com";
+                    }
+                  }
+                }, 100);
               } catch (e) {
+                console.error("BTagShield: 静默模式返回出错", e);
                 window.location.href = document.referrer || "https://www.bilibili.com";
               }
             }, 2000);
