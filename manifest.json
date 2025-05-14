@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "BTagShield",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "按照B站TAG屏蔽视频",
   "icons": {
     "16": "images/icon16.png",

@@ -246,11 +246,10 @@ function exportTags() {
     showStatus('没有标签可导出', 'error');
     return;
   }
-  
-  const dataStr = JSON.stringify({
+    const dataStr = JSON.stringify({
     tags: filterTags,
     exportDate: new Date().toISOString(),
-    version: '1.0'
+    version: '1.0.1'
   });
   
   const blob = new Blob([dataStr], { type: 'application/json' });
